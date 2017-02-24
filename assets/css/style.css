@@ -1,1 +1,76 @@
-css here
+body {
+	background-image: url("../images/TMNT_Layer.jpeg");
+	background-size: 100%;
+}
+
+.container {
+	margin-left: 40px;
+	margin-right: 40px;
+}
+
+.header {
+	position: relative;
+}
+
+.logo {
+	width: 500px;
+	height: auto;
+	margin-left: 10px;
+	margin-top: 10px;
+}
+
+.header h1 {
+	position: absolute;
+	left: 160px;
+	top: 150px;
+	font-size: 60px;
+	color: green;
+	font-family: Impact, serif;
+	text-shadow: -4px 0 black, 0 4px black, 4px 0 black, 0 -4px black;
+}
+
+h2 {
+	color: green;
+	font-size: 30px;
+	text-align: center;
+}
+
+h3 {
+	color: green;
+	font-size: 20px;
+}
+
+.gameContent {
+	background-color: rgba(0, 10, 0, 0.75);
+	color: green;
+	border: solid 1px green;
+	width: 500px;
+	margin-left: 100px;
+	margin-top: 20px;
+	padding: 0px 20px;
+}
+
+#livesLeft {
+	border-top: solid 1px green;
+	border-bottom: solid 1px green;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.gameData {
+	border-top: solid 1px green;
+	padding-top: 5px;
+}
+
+.instructions {
+	text-align: center;
+}
+
+#currentWord {
+	text-align: center;
+	border: solid 0.5px red;
+	padding: 5px;
+	width: 250px;
+	margin-left: 120px;
+	font-size: 20px;
+}

@@ -3,11 +3,32 @@
 <head>
 	<meta charset="utf-8">
 	<title>Hangman</title>
-</head>
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+</head> 
 
 
 <body>
 
+<div class="container">
+	<div class="header">
+		<img class="logo" src="assets/images/TMNT_Logo.png">
+		<h1>Hangman</h1>
+	</div>
+	<br>
+	<br>
+</div>
+<div class="gameContent">
+	<h3 class="instructions">Use your keyboard to guess a letter</h3>
+	<h2>Current Word</h2>
+		<div id="currentWord"></div>
+	<h3>Wrong letters:</h3>
+		<div id="wrongGuess"></div>
+	<div id="livesLeft"></div>
+	<div id="gameData"></div>
+</div>
+
+
+<script src="assets/javascript/game.js"></script>
 </body>
 
 </html>
