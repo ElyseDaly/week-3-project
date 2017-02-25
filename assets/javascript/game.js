@@ -40,26 +40,34 @@ function init() {
 	document.getElementById("currentWord").innerHTML = answerArray.join(" ");  
 };
 init();
+							// need to code a win alert somewhere
 
-
-//LETTER INPUT
-document.onkeyup = function(event) {
-	var letter = String.fromCharCode(event.keyCode).toUpperCase();
-	for (var i = 0; i < wordBeingGuessed.length; i++) {
-		if (wordBeingGuessed[i] === letter) {
-			answerArray[i] = letter;
-			document.getElementById("currentWord").innerHTML = answerArray.join(" ");
-			var letterCorrect = true;
-		}
+var game = function(event) {
+	if (lives > 0) {
+		document.onkeyup = function(event) {                       //LETTER INPUT
+			var letter = String.fromCharCode(event.keyCode).toUpperCase();
+			for (var i = 0; i < wordBeingGuessed.length; i++) {
+				if (wordBeingGuessed[i] === letter) {
+					answerArray[i] = letter;
+					document.getElementById("currentWord").innerHTML = answerArray.join(" ");
+					var letterCorrect = true;
+				}
+			}
+			if (!letterCorrect) {
+				lives--;
+				wrongGuess.push(letter);
+				document.getElementById("wrongGuess").innerHTML = wrongGuess;
+				var livesRemaining = "<h3>Lives Remaining: " + lives + "</h3>";
+				document.querySelector("#livesLeft").innerHTML = livesRemaining;
+			}
+		} /// end of doconkeyup function
+	} // end of (if lives > 0)
+	else {
+		var loseMessage = alert("Bummer, you lose");
+		init();
+		losses++;
 	}
-	if (!letterCorrect) {
-		lives--;
-		wrongGuess.push(letter);
-		document.getElementById("wrongGuess").innerHTML = wrongGuess;
-		var livesRemaining = "<h3>Lives Remaining: " + lives + "</h3>";
-		document.querySelector("#livesLeft").innerHTML = livesRemaining;
-	}
-}
 
-//checks if all letters have been found
 
+} // end of game function
+game();

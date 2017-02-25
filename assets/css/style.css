@@ -4,7 +4,7 @@ body {
 }
 
 .container {
-	margin-left: 40px;
+	margin-left: 450px;
 	margin-right: 40px;
 }
 
@@ -45,7 +45,7 @@ h3 {
 	color: green;
 	border: solid 1px green;
 	width: 500px;
-	margin-left: 100px;
+	margin-left: 250px;
 	margin-top: 20px;
 	padding: 0px 20px;
 }
