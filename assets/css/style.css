@@ -16,13 +16,13 @@ body {
 	width: 500px;
 	height: auto;
 	margin-left: 10px;
-	margin-top: 10px;
+	margin-top: 0px;
 }
 
 .header h1 {
 	position: absolute;
 	left: 160px;
-	top: 150px;
+	top: 130px;
 	font-size: 60px;
 	color: green;
 	font-family: Impact, serif;
@@ -41,20 +41,20 @@ h3 {
 }
 
 .gameContent {
-	background-color: rgba(0, 10, 0, 0.75);
+	background-color: rgba(0, 10, 0, 0.85);
 	color: green;
 	border: solid 1px green;
 	width: 500px;
 	margin-left: 250px;
-	margin-top: 20px;
+	margin-top: 5px;
 	padding: 0px 20px;
 }
 
-#livesLeft {
+.livesClass {
 	border-top: solid 1px green;
 	border-bottom: solid 1px green;
-	padding-top: 5px;
-	padding-bottom: 5px;
+	padding-top: 10px;
+	padding-bottom: 10px;
 }
 
 .gameData {

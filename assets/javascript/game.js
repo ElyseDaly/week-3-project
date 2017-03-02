@@ -11,63 +11,90 @@ var wordBank = [
 	'COWABUNGA', 
 	'PIZZA'
 	];
-var wordBeingGuessed = "";
-var answerArray = [];
+
 var wins = 0;
 var losses = 0;
-var lives = 8;
-var wrongGuess = [];
+var lives = 8;        
+var wordtoGuess = null;  
+var answerArray = [];
+var wrongGuess = [];  
 
-var livesRemaining =
-	"<h3>Lives Remaining: " + lives + "</h3>";
-document.querySelector("#livesLeft").innerHTML = livesRemaining;
-
-var winLoss =
-	"<h3>Wins: " + wins + "</h3>" +
-	"<h3>Losses: " + losses + "</h3>";
-document.querySelector("#gameData").innerHTML = winLoss;
-
-
-//INITIALIZE GAME
-function init() {
-		//picks a random word from above array of choices
-	wordBeingGuessed = wordBank[Math.floor(Math.random() * wordBank.length)];
-		//make answer array appear as underscores
-	for (var i = 0; i < wordBeingGuessed.length; i++) {
+var updatewordToGuess = function() {
+    wordToGuess = wordBank[Math.floor(Math.random() * wordBank.length)];
+    for (var i = 0; i < wordToGuess.length; i++) {
 	answerArray[i] = "_";
 	}
-		//inserts wordBeingGuessed into my html  - links to currentWord div
-	document.getElementById("currentWord").innerHTML = answerArray.join(" ");  
+	document.querySelector('#currentWord').innerHTML = answerArray.join(" ");
 };
-init();
-							// need to code a win alert somewhere
 
-var game = function(event) {
-	if (lives > 0) {
-		document.onkeyup = function(event) {                       //LETTER INPUT
-			var letter = String.fromCharCode(event.keyCode).toUpperCase();
-			for (var i = 0; i < wordBeingGuessed.length; i++) {
-				if (wordBeingGuessed[i] === letter) {
-					answerArray[i] = letter;
-					document.getElementById("currentWord").innerHTML = answerArray.join(" ");
-					var letterCorrect = true;
-				}
+// this function will insert our wrong guesses into our html
+var updatewrongGuess = function() {
+    document.querySelector('#wrongGuess').innerHTML = wrongGuess.join(", ");
+};
+
+//this function will insert our lives remaining into our html
+var updateLivesRemaining = function() {
+    document.querySelector('#livesLeft').innerHTML = lives;
+};
+
+//this function resets the page once we invoke it - we won't invoke it until we either win or lose the game
+var reset = function() {
+    lives = 8;
+    wrongGuess = [];
+    answerArray = [];
+    updatewordToGuess();
+    updatewrongGuess();
+    updateLivesRemaining();
+};
+
+
+updatewordToGuess();
+updateLivesRemaining();
+
+
+//below function will insert letters into our game upon a keypress
+document.onkeyup = function(event) {
+	
+	var letter = String.fromCharCode(event.keyCode).toUpperCase();
+	var letterCorrect = false;
+	var alreadyGuessed = false;
+	
+	//if letter guessed is in the word being guessed
+	for (var i = 0; i < wordToGuess.length; i++) {
+		if (wordToGuess[i] === letter) {
+			answerArray[i] = letter;
+			document.getElementById("currentWord").innerHTML = answerArray.join(" ");
+			letterCorrect = true;
+		}
+	}
+	
+	//if letter guessed is not in the word being guessed
+	if (!letterCorrect) {
+		for (var j = 0; j < wrongGuess.length; j++) {
+			if (letter === wrongGuess[j]) {
+				alreadyGuessed = true;
 			}
-			if (!letterCorrect) {
-				lives--;
-				wrongGuess.push(letter);
-				document.getElementById("wrongGuess").innerHTML = wrongGuess;
-				var livesRemaining = "<h3>Lives Remaining: " + lives + "</h3>";
-				document.querySelector("#livesLeft").innerHTML = livesRemaining;
-			}
-		} /// end of doconkeyup function
-	} // end of (if lives > 0)
-	else {
-		var loseMessage = alert("Bummer, you lose");
-		init();
-		losses++;
+		}
+		if (!alreadyGuessed) {
+			lives--;
+			wrongGuess.push(letter);
+			document.getElementById("wrongGuess").innerHTML = wrongGuess.join(", ");
+			var livesRemaining = lives;
+			document.querySelector("#livesLeft").innerHTML = livesRemaining;
+		}
 	}
 
+	// if lives remining goes down to 0 (too many wrong guesses), the game resets and increases our loss count
+	if (lives === 0) {
+		losses++;
+		document.querySelector('#losses').innerHTML = losses;
+		reset();
+	}
 
-} // end of game function
-game();
+	// if the player guesses all letters in the word being guessed, the game resets and increases our win count
+	if (!answerArray.includes("_")) {
+		wins++;
+		document.querySelector('#wins').innerHTML = wins;
+		reset();
+	}
+}
